@@ -45,6 +45,7 @@ hoge : 1回 / 合計 1219ms
 
 ## Todo
 
+* Separate measurement and output into each class
 * Enable to change log-format
 * Enable to change logging media
 * Add test code
