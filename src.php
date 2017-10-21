@@ -14,11 +14,10 @@ class SimpleProfiler
 		$this->fp = fopen($log_file,'a');
 		$this->init_time = ceil(microtime(true)*1000);
 
-		$txt = "\n----START------( ".(date('Y-m-d H:i:s',$this->init_time))." )------\n";
-		$txt .= "label  : S-E間のms / Initからのms (unixtimestamp)\n";
+		$txt = "\n----START------( ".(date('Y-m-d H:i:s'))." )------\n";
+		$txt .= "label  : S-E間のms / Initからのms \n";
 		fwrite($this->fp,$txt);
 	}
-
 	
 	public function __destruct()
 	{
@@ -36,16 +35,15 @@ class SimpleProfiler
 			$aggregate[$l[0]]['time'] += $l[2];
 		}
 		foreach ( $aggregate as $sig => $a ) {
-			fwrite($this->fp,"{$sig} : {$a['count']}回 / 合計 {$a['time']}ms \n");
+			fwrite($this->fp,"{$sig} : {$a['count']}回 / 合計 {$a['time']}ms / 平均 ".($a['time']/$a['count'])."ms\n");
 		}
-		var_dump($aggregate);die;
 	}
 
 	private function setLog($sig,$time,$fromStart = 0)
 	{
 		$fromInit = ceil(microtime(true)*1000) - $this->init_time;
 		$this->log[] = [$sig,$time,$fromStart,$fromInit,$this->renderIndent()];
-		$format = ($fromStart==0?'[S]':'[E]').$this->renderIndent().$sig." : ".$fromStart." / ".$fromInit. " (".$time.")\n";
+		$format = ($fromStart==0?'[S]':'[E]').$this->renderIndent().$sig." : ".$fromStart." / ".$fromInit ."\n";
 		fwrite($this->fp,$format);
 	}
 
@@ -75,9 +73,3 @@ class SimpleProfiler
 		return $ind;
 	}
 }
-
-
-
-
-
-
