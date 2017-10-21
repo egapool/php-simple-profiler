@@ -23,7 +23,7 @@ output
 ```
 
 ----START------( 49772-04-11 03:22:36 )------
-label  : S-E間のms / Initからのms (unixtimestamp)
+[ ] label  : S-E間のms / Initからのms (unixtimestamp)
 [S] hoge : 0 / 0 (1508494126956)
 [S]  hoge2 : 0 / 0 (1508494126956)
 [E]  hoge2 : 3 / 3 (1508494126959)
